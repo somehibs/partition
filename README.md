@@ -1,2 +1,2 @@
 # partition
-bash, iptables and netns
+iptables and netns in bash
