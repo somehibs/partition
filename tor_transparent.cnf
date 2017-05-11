@@ -1,0 +1,11 @@
+## please replace {} with your chosen netblock
+
+#SOCKSPort 9050 # Default: Bind to localhost:9050 for local connections.
+#SOCKSPort {}.1:9100 # Bind to this address:port too.
+TransPort {}.1:9040
+VirtualAddrNetworkIPv4 10.192.0.0/10
+AutomapHostsOnResolve 1
+DNSPort 10.100.100.1:5353
+TransPort 127.0.0.1:9040
+DNSPort 127.0.0.1:5353
+

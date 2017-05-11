@@ -11,7 +11,7 @@ if [ $# -gt 0 ]; then
 	adapter=$3
 else
 	read -p 'namespace: ' ns
-	read -p 'ip (xxx.xxx.xxx only)' ip
+	read -p 'ip (xxx.xxx.xxx only) ' ip
 	read -p 'adapter (opt): ' adapter
 fi
 
@@ -32,8 +32,11 @@ ip link set $adapter"0" up
 ip link set $adapter"1" netns $ns up
 # set up ip to route between
 ip addr add $ip'.1/24' dev $adapter'0'
-ip netns exec $ns ip addr add $ip'.10/24' dev $adapter'1'
+ip netns exec $ns ip addr add $ip'.2/24' dev $adapter'1'
 ip netns exec $ns ip route add default via $ip'.1' dev $adapter'1'
 # give the namespace a loopback adapter
 netns "ip addr add 127.0.0.1/8 dev lo"
 netns "ip link set lo up"
+
+# optional: change the dns server used by the network namespace
+mkdir -p /etc/netns/$ns
